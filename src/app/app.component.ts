@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { generate } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -37,16 +38,34 @@ export class AppComponent {
     this.includeSymbols= !this.includeSymbols;
   }
 
+  //on clicking this function the goal is to generate whatever password we generate inside 
+  //you have to assign back to the password property 
   onButtonClick(){
-    console.log(`About to generate a password with the following: 
-      Includes letters: ${this.includeLetters}
-      Includes numbers: ${this.includeNumbers}
-      Includes symbols: ${this.includeSymbols}
-      `);
-    this.password = 'MY PASSWORD!!!';
+   const numbers = '1234567890';
+   const letters = 'abcdefghijklmnopqrstuvwxyz';
+   const symbols = '!@#$%^&*()_+';
+
+   let validChars = '';
+   if(this.includeLetters){
+     validChars += letters;
+   }
+   if(this.includeNumbers){
+     validChars += numbers;
+   }
+   if(this.includeSymbols){
+     validChars += symbols;
+   }
+
+   let generatedPassword = '';
+   for(let i=0; i<this.length; i++) {
+     const index = Math.floor(Math.random() * validChars.length);
+     generatedPassword += validChars[index];
+   }
+   this.password = generatedPassword;
   }
 
   getName(){
-    return 'Daksha';
+    return;
   }
+  
 }
