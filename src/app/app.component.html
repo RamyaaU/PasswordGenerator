@@ -23,7 +23,12 @@
 
 <div>
   <!-- event binding syntax -->
-  <button (click)="onButtonClick()">Generate!</button>
+  <button 
+  [disabled]="!(length && (includeLetters || includeSymbols || includeNumbers))
+  " 
+  (click)="onButtonClick()">
+  Generate!
+</button>
 </div>
 
 <div>
@@ -32,5 +37,5 @@
 <input [value]="password" />
 </div>
 
- <!-- interpolation -->
-{{ getName() }}
+ <!-- interpolation
+{{ getName() }} -->
